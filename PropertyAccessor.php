@@ -680,9 +680,9 @@ class PropertyAccessor implements PropertyAccessorInterface
             $previousValue = false;
         }
 
-        foreach ($collection as $item) {
+        foreach ($collection as $key => $item) {
             if (!$previousValue || !in_array($item, $previousValue, true)) {
-                $zval[self::VALUE]->{$addMethod}($item);
+                $zval[self::VALUE]->{$addMethod}($item,$key);
             }
         }
     }
