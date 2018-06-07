@@ -33,23 +33,23 @@ use Symfony\Component\PropertyAccess\Exception\UnexpectedTypeException;
  */
 class PropertyAccessor implements PropertyAccessorInterface
 {
-    private const VALUE = 0;
-    private const REF = 1;
-    private const IS_REF_CHAINED = 2;
-    private const ACCESS_HAS_PROPERTY = 0;
-    private const ACCESS_TYPE = 1;
-    private const ACCESS_NAME = 2;
-    private const ACCESS_REF = 3;
-    private const ACCESS_ADDER = 4;
-    private const ACCESS_REMOVER = 5;
-    private const ACCESS_TYPE_METHOD = 0;
-    private const ACCESS_TYPE_PROPERTY = 1;
-    private const ACCESS_TYPE_MAGIC = 2;
-    private const ACCESS_TYPE_ADDER_AND_REMOVER = 3;
-    private const ACCESS_TYPE_NOT_FOUND = 4;
-    private const CACHE_PREFIX_READ = 'r';
-    private const CACHE_PREFIX_WRITE = 'w';
-    private const CACHE_PREFIX_PROPERTY_PATH = 'p';
+    const VALUE = 0;
+    const REF = 1;
+    const IS_REF_CHAINED = 2;
+    const ACCESS_HAS_PROPERTY = 0;
+    const ACCESS_TYPE = 1;
+    const ACCESS_NAME = 2;
+    const ACCESS_REF = 3;
+    const ACCESS_ADDER = 4;
+    const ACCESS_REMOVER = 5;
+    const ACCESS_TYPE_METHOD = 0;
+    const ACCESS_TYPE_PROPERTY = 1;
+    const ACCESS_TYPE_MAGIC = 2;
+    const ACCESS_TYPE_ADDER_AND_REMOVER = 3;
+    const ACCESS_TYPE_NOT_FOUND = 4;
+    const CACHE_PREFIX_READ = 'r';
+    const CACHE_PREFIX_WRITE = 'w';
+    const CACHE_PREFIX_PROPERTY_PATH = 'p';
 
     /**
      * @var bool
