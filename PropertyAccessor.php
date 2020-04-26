@@ -567,6 +567,22 @@ class PropertyAccessor implements PropertyAccessorInterface
         }
     }
 
+    private function inArray($value, array $collection)
+    {
+        if (\is_object($value) && method_exists($value,'getId') && $value->getId()) {
+            foreach ($collection as $element) {
+                if (method_exists($element, 'getId') && $value->getId() === $element->getId()) {
+                    return true;
+                }
+            }
+        }
+        if (\in_array($value, $collection, true)) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Adjusts a collection-valued property by calling add*() and remove*() methods.
      */
@@ -584,7 +600,7 @@ class PropertyAccessor implements PropertyAccessorInterface
                 $collection = iterator_to_array($collection);
             }
             foreach ($previousValue as $key => $item) {
-                if (!\in_array($item, $collection, true)) {
+                if (!$this->inArray($item, $collection)) {
                     unset($previousValue[$key]);
                     $zval[self::VALUE]->{$removeMethod}($item);
                 }
@@ -594,7 +610,7 @@ class PropertyAccessor implements PropertyAccessorInterface
         }
 
         foreach ($collection as $item) {
-            if (!$previousValue || !\in_array($item, $previousValue, true)) {
+            if (!$previousValue || !$this->inArray($item, $previousValue)) {
                 $zval[self::VALUE]->{$addMethod}($item);
             }
         }
