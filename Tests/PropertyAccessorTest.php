@@ -832,7 +832,7 @@ class PropertyAccessorTest extends TestCase
         $this->propertyAccessor->setValue($object, 'email', 'test@email.com');
 
         self::assertEquals('test@email.com', $object->getEmail());
-        self::assertEmpty($object->getEmails());
+        self::assertSame([], $object->getEmails());
     }
 
     public function testWriteToPluralPropertyWhileSingularOneExists()
