@@ -1050,7 +1050,7 @@ class PropertyAccessorTest extends TestCase
         }
 
         return (new \ReflectionClass(UninitializedObjectProperty::class))->newLazyGhost(fn () => null);
-}
+    }
 
     /**
      * @requires PHP 8.4
