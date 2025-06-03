@@ -1032,29 +1032,9 @@ class PropertyAccessorTest extends TestCase
 
     private function createUninitializedObjectPropertyGhost(): UninitializedObjectProperty
     {
-        if (\PHP_VERSION_ID < 80400) {
-            if (!class_exists(ProxyHelper::class)) {
-                $this->markTestSkipped(\sprintf('Class "%s" is required to run this test.', ProxyHelper::class));
-            }
-
-            $class = 'UninitializedObjectPropertyGhost';
-
-            if (!class_exists($class)) {
-                eval('class '.$class.ProxyHelper::generateLazyGhost(new \ReflectionClass(UninitializedObjectProperty::class)));
-            }
-
-            $this->assertTrue(class_exists($class));
-
-            return $class::createLazyGhost(initializer: function ($instance) {
-            });
-        }
-
-        return (new \ReflectionClass(UninitializedObjectProperty::class))->newLazyGhost(fn () => null);
+        return new \ReflectionClass(UninitializedObjectProperty::class)->newLazyGhost(fn () => null);
     }
 
-    /**
-     * @requires PHP 8.4
-     */
     public function testIsWritableWithAsymmetricVisibility()
     {
         $object = new AsymmetricVisibility();
@@ -1066,9 +1046,6 @@ class PropertyAccessorTest extends TestCase
         $this->assertFalse($this->propertyAccessor->isWritable($object, 'virtualNoSetHook'));
     }
 
-    /**
-     * @requires PHP 8.4
-     */
     public function testIsReadableWithAsymmetricVisibility()
     {
         $object = new AsymmetricVisibility();
@@ -1081,8 +1058,6 @@ class PropertyAccessorTest extends TestCase
     }
 
     /**
-     * @requires PHP 8.4
-     *
      * @dataProvider setValueWithAsymmetricVisibilityDataProvider
      */
     public function testSetValueWithAsymmetricVisibility(string $propertyPath, ?string $expectedException)
