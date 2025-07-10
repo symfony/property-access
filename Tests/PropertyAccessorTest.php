@@ -149,7 +149,7 @@ class PropertyAccessorTest extends TestCase
         $this->expectException(UninitializedPropertyException::class);
         $this->expectExceptionMessage('The method "class@anonymous::getUninitialized()" returned "null", but expected type "array". Did you forget to initialize a property or to make the return type nullable using "?array"?');
 
-        $object = new class() {
+        $object = new class {
             private $uninitialized;
 
             public function getUninitialized(): array
@@ -166,7 +166,7 @@ class PropertyAccessorTest extends TestCase
         $this->expectException(UninitializedPropertyException::class);
         $this->expectExceptionMessage('The property "class@anonymous::$uninitialized" is not readable because it is typed "string". You should initialize it or declare a default value instead.');
 
-        $object = new class() {
+        $object = new class {
             private string $uninitialized;
 
             public function getUninitialized(): string
@@ -183,7 +183,7 @@ class PropertyAccessorTest extends TestCase
         $this->expectException(UninitializedPropertyException::class);
         $this->expectExceptionMessage('The property "class@anonymous::$uninitialized" is not readable because it is typed "string". You should initialize it or declare a default value instead.');
 
-        $object = new class() {
+        $object = new class {
             public string $uninitialized;
         };
 
@@ -211,7 +211,7 @@ class PropertyAccessorTest extends TestCase
         $this->expectException(UninitializedPropertyException::class);
         $this->expectExceptionMessage('The method "stdClass@anonymous::getUninitialized()" returned "null", but expected type "array". Did you forget to initialize a property or to make the return type nullable using "?array"?');
 
-        $object = new class() extends \stdClass {
+        $object = new class extends \stdClass {
             private $uninitialized;
 
             public function getUninitialized(): array
@@ -228,7 +228,7 @@ class PropertyAccessorTest extends TestCase
         $this->expectException(UninitializedPropertyException::class);
         $this->expectExceptionMessage('The method "Symfony\Component\PropertyAccess\Tests\Fixtures\UninitializedPrivateProperty@anonymous::getUninitialized()" returned "null", but expected type "array". Did you forget to initialize a property or to make the return type nullable using "?array"?');
 
-        $object = new class() extends UninitializedPrivateProperty {
+        $object = new class extends UninitializedPrivateProperty {
         };
 
         $this->propertyAccessor->getValue($object, 'uninitialized');
@@ -1010,7 +1010,7 @@ class PropertyAccessorTest extends TestCase
     private function createUninitializedObjectPropertyGhost(): UninitializedObjectProperty
     {
         if (!class_exists(ProxyHelper::class)) {
-            $this->markTestSkipped(sprintf('Class "%s" is required to run this test.', ProxyHelper::class));
+            $this->markTestSkipped(\sprintf('Class "%s" is required to run this test.', ProxyHelper::class));
         }
 
         $class = 'UninitializedObjectPropertyGhost';
@@ -1072,7 +1072,7 @@ class PropertyAccessorTest extends TestCase
     }
 
     /**
-     * @return iterable<array{0: string, 1: null|class-string}>
+     * @return iterable<array{0: string, 1: class-string|null}>
      */
     public static function setValueWithAsymmetricVisibilityDataProvider(): iterable
     {
