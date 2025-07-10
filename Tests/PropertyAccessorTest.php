@@ -1095,7 +1095,7 @@ class PropertyAccessorTest extends TestCase
     }
 
     /**
-     * @return iterable<array{0: string, 1: null|class-string}>
+     * @return iterable<array{0: string, 1: class-string|null}>
      */
     public static function setValueWithAsymmetricVisibilityDataProvider(): iterable
     {
