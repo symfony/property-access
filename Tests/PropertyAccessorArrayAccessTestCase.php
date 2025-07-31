@@ -11,6 +11,7 @@
 
 namespace Symfony\Component\PropertyAccess\Tests;
 
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\PropertyAccess\Exception\NoSuchIndexException;
 use Symfony\Component\PropertyAccess\PropertyAccess;
@@ -43,9 +44,7 @@ abstract class PropertyAccessorArrayAccessTestCase extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider getValidPropertyPaths
-     */
+    #[DataProvider('getValidPropertyPaths')]
     public function testGetValue($collection, $path, $value)
     {
         $this->assertSame($value, $this->propertyAccessor->getValue($collection, $path));
@@ -64,9 +63,7 @@ abstract class PropertyAccessorArrayAccessTestCase extends TestCase
         $this->propertyAccessor->getValue($object, '[lastName]');
     }
 
-    /**
-     * @dataProvider getValidPropertyPaths
-     */
+    #[DataProvider('getValidPropertyPaths')]
     public function testSetValue($collection, $path)
     {
         $this->propertyAccessor->setValue($collection, $path, 'Updated');
@@ -74,25 +71,19 @@ abstract class PropertyAccessorArrayAccessTestCase extends TestCase
         $this->assertSame('Updated', $this->propertyAccessor->getValue($collection, $path));
     }
 
-    /**
-     * @dataProvider getValidPropertyPaths
-     */
+    #[DataProvider('getValidPropertyPaths')]
     public function testIsReadable($collection, $path)
     {
         $this->assertTrue($this->propertyAccessor->isReadable($collection, $path));
     }
 
-    /**
-     * @dataProvider getValidPropertyPaths
-     */
+    #[DataProvider('getValidPropertyPaths')]
     public function testIsWritable($collection, $path)
     {
         $this->assertTrue($this->propertyAccessor->isWritable($collection, $path));
     }
 
-    /**
-     * @dataProvider getInvalidPropertyPaths
-     */
+    #[DataProvider('getInvalidPropertyPaths')]
     public function testIsNotWritable($collection, $path)
     {
         $this->assertFalse($this->propertyAccessor->isWritable($collection, $path));
