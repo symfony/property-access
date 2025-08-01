@@ -41,7 +41,6 @@ use Symfony\Component\PropertyAccess\Tests\Fixtures\TypeHinted;
 use Symfony\Component\PropertyAccess\Tests\Fixtures\UninitializedObjectProperty;
 use Symfony\Component\PropertyAccess\Tests\Fixtures\UninitializedPrivateProperty;
 use Symfony\Component\PropertyAccess\Tests\Fixtures\UninitializedProperty;
-use Symfony\Component\VarExporter\ProxyHelper;
 
 class PropertyAccessorTest extends TestCase
 {
