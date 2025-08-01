@@ -64,7 +64,7 @@ abstract class PropertyAccessorArrayAccessTestCase extends TestCase
     }
 
     #[DataProvider('getValidPropertyPaths')]
-    public function testSetValue($collection, $path)
+    public function testSetValue($collection, $path, $value)
     {
         $this->propertyAccessor->setValue($collection, $path, 'Updated');
 
@@ -72,19 +72,19 @@ abstract class PropertyAccessorArrayAccessTestCase extends TestCase
     }
 
     #[DataProvider('getValidPropertyPaths')]
-    public function testIsReadable($collection, $path)
+    public function testIsReadable($collection, $path, $value)
     {
         $this->assertTrue($this->propertyAccessor->isReadable($collection, $path));
     }
 
     #[DataProvider('getValidPropertyPaths')]
-    public function testIsWritable($collection, $path)
+    public function testIsWritable($collection, $path, $value)
     {
         $this->assertTrue($this->propertyAccessor->isWritable($collection, $path));
     }
 
     #[DataProvider('getInvalidPropertyPaths')]
-    public function testIsNotWritable($collection, $path)
+    public function testIsNotWritable($collection, $path, $value)
     {
         $this->assertFalse($this->propertyAccessor->isWritable($collection, $path));
     }
