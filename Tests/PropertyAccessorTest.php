@@ -1009,20 +1009,24 @@ class PropertyAccessorTest extends TestCase
 
     private function createUninitializedObjectPropertyGhost(): UninitializedObjectProperty
     {
-        if (!class_exists(ProxyHelper::class)) {
-            $this->markTestSkipped(\sprintf('Class "%s" is required to run this test.', ProxyHelper::class));
+        if (\PHP_VERSION_ID < 80400) {
+            if (!class_exists(ProxyHelper::class)) {
+                $this->markTestSkipped(\sprintf('Class "%s" is required to run this test.', ProxyHelper::class));
+            }
+
+            $class = 'UninitializedObjectPropertyGhost';
+
+            if (!class_exists($class)) {
+                eval('class '.$class.ProxyHelper::generateLazyGhost(new \ReflectionClass(UninitializedObjectProperty::class)));
+            }
+
+            $this->assertTrue(class_exists($class));
+
+            return $class::createLazyGhost(initializer: function ($instance) {
+            });
         }
 
-        $class = 'UninitializedObjectPropertyGhost';
-
-        if (!class_exists($class)) {
-            eval('class '.$class.ProxyHelper::generateLazyGhost(new \ReflectionClass(UninitializedObjectProperty::class)));
-        }
-
-        $this->assertTrue(class_exists($class));
-
-        return $class::createLazyGhost(initializer: function ($instance) {
-        });
+        return (new \ReflectionClass(UninitializedObjectProperty::class))->newLazyGhost(fn () => null);
     }
 
     /**
