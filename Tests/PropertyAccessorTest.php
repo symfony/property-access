@@ -306,7 +306,7 @@ class PropertyAccessorTest extends TestCase
     }
 
     #[DataProvider('getValidWritePropertyPaths')]
-    public function testSetValue(array|object $objectOrArray, string $path)
+    public function testSetValue(array|object $objectOrArray, string $path, ?string $value)
     {
         $this->propertyAccessor->setValue($objectOrArray, $path, 'Updated');
 
@@ -402,7 +402,7 @@ class PropertyAccessorTest extends TestCase
     }
 
     #[DataProvider('getValidReadPropertyPaths')]
-    public function testIsReadable(array|object $objectOrArray, string $path)
+    public function testIsReadable(array|object $objectOrArray, string $path, ?string $value)
     {
         $this->assertTrue($this->propertyAccessor->isReadable($objectOrArray, $path));
     }
@@ -447,7 +447,7 @@ class PropertyAccessorTest extends TestCase
     }
 
     #[DataProvider('getValidWritePropertyPaths')]
-    public function testIsWritable(array|object $objectOrArray, string $path)
+    public function testIsWritable(array|object $objectOrArray, string $path, ?string $value)
     {
         $this->assertTrue($this->propertyAccessor->isWritable($objectOrArray, $path));
     }
