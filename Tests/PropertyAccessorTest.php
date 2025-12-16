@@ -992,7 +992,7 @@ class PropertyAccessorTest extends TestCase
 
     private function createUninitializedObjectPropertyGhost(): UninitializedObjectProperty
     {
-        return new \ReflectionClass(UninitializedObjectProperty::class)->newLazyGhost(fn () => null);
+        return new \ReflectionClass(UninitializedObjectProperty::class)->newLazyGhost(static fn () => null);
     }
 
     public function testIsWritableWithAsymmetricVisibility()
