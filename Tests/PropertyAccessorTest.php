@@ -54,6 +54,21 @@ class PropertyAccessorTest extends TestCase
         $this->propertyAccessor = new PropertyAccessor();
     }
 
+    public function testPrefersPropertyOverMethodWithSameNameAndRequiredArgs()
+    {
+        $obj = new class {
+            public bool $loaded = true;
+
+            // Same name as property, but requires an argument: must NOT be called for reading
+            public function loaded(string $arg): bool
+            {
+                throw new \RuntimeException('Method should not be invoked during property read');
+            }
+        };
+
+        $this->assertTrue($this->propertyAccessor->getValue($obj, 'loaded'));
+    }
+
     public static function getPathsWithMissingProperty()
     {
         return [
