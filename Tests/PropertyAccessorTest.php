@@ -33,6 +33,7 @@ use Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassMagicGet;
 use Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassSetValue;
 use Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassTypedProperty;
 use Symfony\Component\PropertyAccess\Tests\Fixtures\TestClassTypeErrorInsideCall;
+use Symfony\Component\PropertyAccess\Tests\Fixtures\TestIgnoreVoidAccessor;
 use Symfony\Component\PropertyAccess\Tests\Fixtures\TestPublicPropertyDynamicallyCreated;
 use Symfony\Component\PropertyAccess\Tests\Fixtures\TestPublicPropertyGetterOnObject;
 use Symfony\Component\PropertyAccess\Tests\Fixtures\TestPublicPropertyGetterOnObjectMagicGet;
@@ -976,6 +977,33 @@ class PropertyAccessorTest extends TestCase
         $this->expectExceptionMessage('The property "Symfony\Component\PropertyAccess\Tests\Fixtures\UninitializedObjectProperty::$privateUninitialized" is not readable because it is typed "DateTimeInterface". You should initialize it or declare a default value instead.');
 
         $this->propertyAccessor->getValue(new UninitializedObjectProperty(), 'privateUninitialized');
+    }
+
+    /**
+     * @dataProvider voidAccessorProvider
+     */
+    public function testIgnoreVoidAccessor(string $property, mixed $value)
+    {
+        $object = new TestIgnoreVoidAccessor();
+        if (null === $value) {
+            $this->expectException(NoSuchPropertyException::class);
+        }
+
+        $this->assertSame(
+            $value,
+            $this->propertyAccessor->getValue($object, $property),
+        );
+    }
+
+    public static function voidAccessorProvider()
+    {
+        return [
+            ['setValue', false],
+            ['setterValue', false],
+            ['neverValue', false],
+            ['normalValue', false],
+            ['undefinedValue', null],
+        ];
     }
 
     public function testGetValuePropertyThrowsExceptionIfUninitializedWithLazyGhost()
