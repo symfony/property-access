@@ -981,9 +981,7 @@ class PropertyAccessorTest extends TestCase
         $this->propertyAccessor->getValue(new UninitializedObjectProperty(), 'privateUninitialized');
     }
 
-    /**
-     * @dataProvider voidAccessorProvider
-     */
+    #[DataProvider('voidAccessorProvider')]
     public function testIgnoreVoidAccessor(string $property, mixed $value)
     {
         $object = new TestIgnoreVoidAccessor();
