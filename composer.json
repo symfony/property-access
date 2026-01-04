@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": ">=8.2",
-        "symfony/property-info": "^6.4.31|~7.3.9|^7.4.2"
+        "symfony/property-info": "^6.4.32|~7.3.10|^7.4.4"
     },
     "require-dev": {
         "symfony/cache": "^6.4|^7.0"
