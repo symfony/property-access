@@ -1048,11 +1048,11 @@ class PropertyAccessorTest extends TestCase
 
             $this->assertTrue(class_exists($class));
 
-            return $class::createLazyGhost(initializer: function ($instance) {
+            return $class::createLazyGhost(initializer: static function ($instance) {
             });
         }
 
-        return (new \ReflectionClass(UninitializedObjectProperty::class))->newLazyGhost(fn () => null);
+        return (new \ReflectionClass(UninitializedObjectProperty::class))->newLazyGhost(static fn () => null);
     }
 
     #[RequiresPhp('>=8.4')]
