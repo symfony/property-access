@@ -1055,7 +1055,7 @@ class PropertyAccessorTest extends TestCase
         return (new \ReflectionClass(UninitializedObjectProperty::class))->newLazyGhost(static fn () => null);
     }
 
-    #[RequiresPhp('>=8.4')]
+    #[RequiresPhp('>=8.4.0')]
     public function testIsWritableWithAsymmetricVisibility()
     {
         $object = new AsymmetricVisibility();
@@ -1067,7 +1067,7 @@ class PropertyAccessorTest extends TestCase
         $this->assertFalse($this->propertyAccessor->isWritable($object, 'virtualNoSetHook'));
     }
 
-    #[RequiresPhp('>=8.4')]
+    #[RequiresPhp('>=8.4.0')]
     public function testIsReadableWithAsymmetricVisibility()
     {
         $object = new AsymmetricVisibility();
@@ -1079,7 +1079,7 @@ class PropertyAccessorTest extends TestCase
         $this->assertTrue($this->propertyAccessor->isReadable($object, 'virtualNoSetHook'));
     }
 
-    #[RequiresPhp('>=8.4')]
+    #[RequiresPhp('>=8.4.0')]
     #[DataProvider('setValueWithAsymmetricVisibilityDataProvider')]
     public function testSetValueWithAsymmetricVisibility(string $propertyPath, ?string $expectedException)
     {
