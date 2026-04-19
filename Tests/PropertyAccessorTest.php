@@ -1048,7 +1048,7 @@ class PropertyAccessorTest extends TestCase
 
             $this->assertTrue(class_exists($class));
 
-            return $class::createLazyGhost(initializer: static function ($instance) {
+            return $class::createLazyGhost(static function ($instance) {
             });
         }
 
